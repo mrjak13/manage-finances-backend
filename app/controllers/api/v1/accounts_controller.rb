@@ -6,7 +6,9 @@ class Api::V1::AccountsController < ApplicationController
   def index
     @accounts = Account.all
 
-    render json: @accounts
+    # render json: @accounts
+    accounts_json = AccountSerializer.new(@accounts).serialized_json
+    render json: accounts_json
   end
 
   # GET /accounts/1
