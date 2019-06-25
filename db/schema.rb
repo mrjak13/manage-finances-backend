@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2019_06_25_123350) do
 
   create_table "transactions", force: :cascade do |t|
     t.string "name"
-    t.string "type"
+    t.string "action"
     t.date "date"
     t.integer "amount"
     t.integer "account_id"
