@@ -15,15 +15,17 @@ ActiveRecord::Schema.define(version: 2019_06_25_123350) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.integer "balance"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "transactions", force: :cascade do |t|
     t.string "name"
+    t.string "type"
     t.date "date"
     t.integer "amount"
-    t.string "type"
+    t.integer "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
