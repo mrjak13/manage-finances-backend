@@ -1,10 +1,12 @@
-class AccountsController < ApplicationController
+class Api::V1::AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
 
   # GET /accounts
   # GET /accounts.json
   def index
     @accounts = Account.all
+
+    render json: @accounts
   end
 
   # GET /accounts/1
