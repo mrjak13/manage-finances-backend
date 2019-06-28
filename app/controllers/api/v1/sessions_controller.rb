@@ -1,5 +1,5 @@
 class Api::V1::SessionsController < ApplicationController
-	protect_from_forgery with: :null_session
+	# protect_from_forgery with: :null_session
 
 	def create
 		@user = User.find_by(email: params[:session][:email])
@@ -22,12 +22,6 @@ class Api::V1::SessionsController < ApplicationController
 				error: "No one logged in"
 			}
 		end
-	end
-
-	private
-
-	def sessionParams
-		params.require(:session).permit(:email, :password)
 	end
 
 end
