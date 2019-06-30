@@ -4,7 +4,8 @@ class Api::V1::TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.all
+    account = Account.find(params[:account_id].to_i)
+    @transactions = account.transactions
 
     # render json: @transactions
     transactions_json = TransactionSerializer.new(@transactions).serialized_json
