@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 		namespace :v1 do
 
 		  resources :users do 
-		  	resources :accouts
+		  	resources :accounts
 		  end
 
 			resources :accounts do
