@@ -25,17 +25,6 @@ class Api::V1::AccountsController < ApplicationController
   def edit
   end
 
-    if @user && @user.authenticate(params[:session][:password])
-      session[:user_id] = @user.id
-
-      user_json = UserSerializer.new(@user).serialized_json
-      render json: user_json
-    else
-      render json: {
-        error: "Invalid Credentials"
-      }
-    end
-
   # POST /accounts
   # POST /accounts.json
   def create
@@ -43,8 +32,8 @@ class Api::V1::AccountsController < ApplicationController
     @account = current_user.accounts.build(name: account_params[:name], balance: account_params[:balance].to_f)
 
     if @account.save
-      account_json = AccountSerializer.new(@accout).serialized_json
-      render json: account_json 
+      account_json = AccountSerializer.new(@account).serialized_json
+      render json: @account 
     else
       render json: { 
         error: @account.errors.full_messages
