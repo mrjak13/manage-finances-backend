@@ -30,8 +30,7 @@ class Api::V1::UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
-    binding.pry
+    
     user_json = UserSerializer.new(@user).serialized_json
     
     if @user.save
