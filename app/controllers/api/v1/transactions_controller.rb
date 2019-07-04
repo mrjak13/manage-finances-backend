@@ -29,16 +29,14 @@ class Api::V1::TransactionsController < ApplicationController
   # POST /transactions
   # POST /transactions.json
   def create
-    @transaction = Transaction.new(transaction_params)
-
-    respond_to do |format|
-      if @transaction.save
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-        format.json { render :show, status: :created, location: @transaction }
-      else
-        format.html { render :new }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
-      end
+    account = Account.find(params[:account_id].to_i)
+    @transaction = account.transactions.build(transaction_params)
+      
+    if @transaction.save
+      transactions_json = TransactionSerializer.new(@transactions).serialized_json
+      render json: transactions_json
+    else
+      render json: @transaction.errors
     end
   end
 
@@ -74,6 +72,6 @@ class Api::V1::TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:name, :date, :amount, :type)
+      params.require(:transaction).permit(:name, :date, :amount, :action)
     end
 end
