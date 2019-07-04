@@ -16,11 +16,11 @@ savings = Account.first
 
 checking = Account.last
 
-Transaction.create(name: "Deposit", account_id: checking.id, action: "increase", date: Time.now, amount: 1000)
+Transaction.create(name: "Direct Deposit", account_id: checking.id, action: "Deposit", date: Time.now, amount: 1000)
 
-Transaction.create(name: "Deposit", account_id: savings.id, action: "increase", date: Time.now, amount: 1500)
+Transaction.create(name: "Check 001", account_id: savings.id, action: "Deposit", date: Time.now, amount: 1500)
 
-Transaction.create(name: "Withdraw", account_id: savings.id, action: "decrease", date: Time.now, amount: 1500)
+Transaction.create(name: "Rent", account_id: savings.id, action: "Withdrawl", date: Time.now, amount: 1500)
 
 
 
