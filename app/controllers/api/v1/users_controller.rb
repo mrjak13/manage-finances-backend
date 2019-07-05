@@ -40,7 +40,9 @@ class Api::V1::UsersController < ApplicationController
       render json: user_json
     else
       
-      render json: @user.errors.full_messages
+      render json: {
+        errors: @user.errors.full_messages
+      }
     end
   end
 
