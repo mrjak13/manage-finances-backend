@@ -36,7 +36,7 @@ class Api::V1::AccountsController < ApplicationController
       render json: @account 
     else
       render json: { 
-        error: @account.errors.full_messages
+        errors: @account.errors.full_messages
       }
     end
     
