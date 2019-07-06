@@ -32,6 +32,7 @@ class Api::V1::TransactionsController < ApplicationController
     account = Account.find(params[:account_id].to_i)
     @transaction = account.transactions.build(transaction_params)
     if @transaction.save
+      account.update(balance: account.get_balance)
       transaction_json = TransactionSerializer.new(@transaction).serialized_json
       render json: transaction_json
     else
