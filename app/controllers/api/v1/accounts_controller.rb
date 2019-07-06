@@ -29,10 +29,16 @@ class Api::V1::AccountsController < ApplicationController
   # POST /accounts.json
   def create
 
-    @account = current_user.accounts.build(name: account_params[:name], balance: account_params[:balance].to_f)
+    @account = current_user.accounts.build(name: account_params[:name])
 
-    if @account.save
-      account_json = AccountSerializer.new(@account).serialized_json
+    if @account.valid? && account_params[:balance].to_f > 0
+      transaction = @account.transactions.build(name: "Initial Balance", action: "Deposit", amount: account_params[:balance].to_f, date: DateTime.now)
+      @account[:balance] = @account.get_balance
+      @account.save
+
+      render json: @account
+
+    elsif @account.save
       render json: @account 
     else
       render json: { 
