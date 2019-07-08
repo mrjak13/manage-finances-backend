@@ -1,30 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-
-  # GET /users
-  # GET /users.json
-  def index
-    @users = User.all
-
-    # render json: @users
-
-    users_json = UserSerializer.new(@users).serialized_json
-    render json: users_json
-  end
-
-  # GET /users/1
-  # GET /users/1.json
-  def show
-  end
-
-  # GET /users/new
-  def new
-    @user = User.new
-  end
-
-  # GET /users/1/edit
-  def edit
-  end
+  before_action :set_user, only: [:update, :destroy]
 
   # POST /users
   # POST /users.json
