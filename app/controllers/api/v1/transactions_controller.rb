@@ -1,5 +1,5 @@
 class Api::V1::TransactionsController < ApplicationController
-  before_action :set_transaction, only: [:show, :edit, :update, :destroy]
+  before_action :set_transaction, only: [:update, :destroy]
 
   # GET /transactions
   # GET /transactions.json
@@ -7,23 +7,8 @@ class Api::V1::TransactionsController < ApplicationController
     account = Account.find(params[:account_id].to_i)
     @transactions = account.transactions
 
-    # render json: @transactions
     transactions_json = TransactionSerializer.new(@transactions).serialized_json
     render json: transactions_json
-  end
-
-  # GET /transactions/1
-  # GET /transactions/1.json
-  def show
-  end
-
-  # GET /transactions/new
-  def new
-    @transaction = Transaction.new
-  end
-
-  # GET /transactions/1/edit
-  def edit
   end
 
   # POST /transactions
@@ -59,11 +44,11 @@ class Api::V1::TransactionsController < ApplicationController
   # DELETE /transactions/1
   # DELETE /transactions/1.json
   def destroy
+    account = @transaction.account
     @transaction.destroy
-    respond_to do |format|
-      format.html { redirect_to transactions_url, notice: 'Transaction was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    account.update(balance: account.get_balance)
+    json_user = UserSerializer.new(current_user).serialized_json
+    render json: json_user
   end
 
   private
