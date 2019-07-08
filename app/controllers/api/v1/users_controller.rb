@@ -31,9 +31,9 @@ class Api::V1::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     
-    user_json = UserSerializer.new(@user).serialized_json
     
     if @user.save
+      user_json = UserSerializer.new(@user).serialized_json
 
       session[:user_id] = @user.id
 

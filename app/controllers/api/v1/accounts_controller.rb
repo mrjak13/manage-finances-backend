@@ -66,10 +66,6 @@ class Api::V1::AccountsController < ApplicationController
   # DELETE /accounts/1.json
   def destroy
     @account.destroy
-    respond_to do |format|
-      format.html { redirect_to accounts_url, notice: 'Account was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   private
