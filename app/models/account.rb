@@ -4,7 +4,7 @@ class Account < ApplicationRecord
 	# validates :balance, numerically: true
 
 	belongs_to :user
-	has_many :transactions
+	has_many :transactions, :dependent => :destroy
 
 	def get_balance
 		balance = 0
