@@ -16,7 +16,7 @@ Now [manage your fianances](https://github.com/mrjak13/manage-finances-frontend)
 
 ## Built With
 
-* [Ruby on Rails](https://reactjs.org/) - Web framework
+* [Ruby on Rails](https://rubyonrails.org/) - API framework
 
 ## License
 
